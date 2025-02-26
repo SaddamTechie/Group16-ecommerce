@@ -1,0 +1,41 @@
+.notifications-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.notification {
+  background: white;
+  padding: 15px 25px;
+  border-radius: 4px;
+  margin-top: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  animation: slideIn 0.3s ease-out;
+}
+
+.notification.success {
+  background: #4caf50;
+  color: white;
+}
+
+.notification.error {
+  background: #f44336;
+  color: white;
+}
+
+.notification.info {
+  background: #2196f3;
+  color: white;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+} 
