@@ -14,40 +14,43 @@ import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import { WishlistProvider } from './context/WishlistContext';
 import { NotificationProvider } from './context/NotificationContext';
+import { ProductProvider } from './context/ProductContext';
 
 function App() {
   return (
     <AuthProvider>
-      <WishlistProvider>
-        <CartProvider>
-          <NotificationProvider>
-            <Router>
-              <div className="app">
-                <Navbar />
-                <main className="main-content">
-                  <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/products" element={<Products />} />
-                    <Route path="/product/:id" element={<ProductDetail />} />
-                    <Route path="/cart" element={<Cart />} />
-                    <Route 
-                      path="/checkout" 
-                      element={
-                        <ProtectedRoute>
-                          <Checkout />
-                        </ProtectedRoute>
-                      } 
-                    />
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/register" element={<Register />} />
-                  </Routes>
-                </main>
-                <Footer />
-              </div>
-            </Router>
-          </NotificationProvider>
-        </CartProvider>
-      </WishlistProvider>
+      <ProductProvider>
+        <WishlistProvider>
+          <CartProvider>
+            <NotificationProvider>
+              <Router>
+                <div className="app">
+                  <Navbar />
+                  <main className="main-content">
+                    <Routes>
+                      <Route path="/" element={<Home />} />
+                      <Route path="/products" element={<Products />} />
+                      <Route path="/product/:id" element={<ProductDetail />} />
+                      <Route path="/cart" element={<Cart />} />
+                      <Route
+                        path="/checkout"
+                        element={
+                          <ProtectedRoute>
+                            <Checkout />
+                          </ProtectedRoute>
+                        }
+                      />
+                      <Route path="/login" element={<Login />} />
+                      <Route path="/register" element={<Register />} />
+                    </Routes>
+                  </main>
+                  <Footer />
+                </div>
+              </Router>
+            </NotificationProvider>
+          </CartProvider>
+        </WishlistProvider>
+      </ProductProvider>
     </AuthProvider>
   );
 }

@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
-import { products, categories } from '../data/products';
+import { categories } from '../data/products';
 import { useWishlist } from '../context/WishlistContext';
 import { useNotification } from '../context/NotificationContext';
 import './Products.css';
+import { useProducts } from '../context/ProductContext';
 
 function Products() {
+  const { products, fetchProductById, addProduct, error } = useProducts();
   const { addItem } = useCart();
   const [filteredProducts, setFilteredProducts] = useState(products);
   const [filters, setFilters] = useState({
@@ -16,6 +18,8 @@ function Products() {
   const [searchParams] = useSearchParams();
   const { addToWishlist, isInWishlist } = useWishlist();
   const { addNotification } = useNotification();
+
+
 
   const handleCategoryChange = (category) => {
     setFilters(prev => {
@@ -96,7 +100,7 @@ function Products() {
 
       <div className="products-grid">
         {filteredProducts.map(product => (
-          <Link to={`/product/${product.id}`} key={product.id} className="product-card">
+          <Link to={`/product/${product._id}`} key={product._id} className="product-card">
             <img src={product.image} alt={product.name} />
             <h3>{product.name}</h3>
             <p className="price">${product.price}</p>

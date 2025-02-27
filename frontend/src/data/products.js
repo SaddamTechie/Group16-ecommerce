@@ -59,6 +59,7 @@ export const products = [
 
 export const categories = [
   "Electronics",
+  "Suits",
   "Fashion",
   "Home & Living"
 ]; 
