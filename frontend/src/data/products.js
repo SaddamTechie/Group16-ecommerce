@@ -58,8 +58,13 @@ export const products = [
 ];
 
 export const categories = [
-  "Electronics",
-  "Suits",
-  "Fashion",
-  "Home & Living"
+    "Electronics",
+    "Accessories",
+    "Footwear",
+    "Appliances",
+    "Fitness",
+    "Books",
+    "Home Decor",
+    "Bags",
+    "Kitchenware"
 ]; 

@@ -31,7 +31,7 @@ function Cart() {
                   <button onClick={() => updateQuantity(item._id, item.quantity + 1)}>+</button>
                 </div>
                 <p className="item-total">${(item.price * item.quantity).toFixed(2)}</p>
-                <button className="remove-btn" onClick={() => removeItem(item.id)}>Remove</button>
+                <button className="remove-btn" onClick={() => removeItem(item._id)}>Remove</button>
               </div>
             ))}
           </div>

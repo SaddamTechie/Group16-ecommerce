@@ -1,33 +1,44 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import './ProductDetail.css';
+import { useNotification } from '../context/NotificationContext';
+import { useCart } from '../context/CartContext';
 
 function ProductDetail() {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
+  const { addNotification } = useNotification();
+  const { addItem } = useCart();
+  
 
   useEffect(() => {
-    // Simulate API call
-    setProduct({
-      id: 1,
-      name: "Wireless Headphones",
-      price: 99.99,
-      image: "/headphones.jpg",
-      description: "High-quality wireless headphones with noise cancellation.",
-      specs: [
-        "Bluetooth 5.0",
-        "Active Noise Cancellation",
-        "30-hour battery life",
-        "Quick charging"
-      ]
-    });
+    const loadProduct = async () => {
+      try {
+        const response = await fetch(`http://localhost:8000/api/products/${id}`);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        setProduct(data.data);
+      } catch (error) {
+        throw error;
+      }
+    };
+
+    loadProduct();
   }, [id]);
+  
 
   if (!product) {
     return <div className="loading">Loading...</div>;
   }
 
+  const handleAddToCart = (e, product) => {
+    e.preventDefault();
+    addItem(product);
+    addNotification('Added to cart!', 'success');
+  };
   return (
     <div className="product-detail">
       <div className="product-image">
@@ -38,12 +49,12 @@ function ProductDetail() {
         <p className="price">${product.price}</p>
         <p className="description">{product.description}</p>
         <div className="specs">
-          <h3>Specifications:</h3>
+          {/* <h3>Specifications:</h3>
           <ul>
             {product.specs.map((spec, index) => (
               <li key={index}>{spec}</li>
             ))}
-          </ul>
+          </ul> */}
         </div>
         <div className="purchase-controls">
           <div className="quantity">
@@ -51,7 +62,7 @@ function ProductDetail() {
             <span>{quantity}</span>
             <button onClick={() => setQuantity(q => q + 1)}>+</button>
           </div>
-          <button className="btn btn-primary">Add to Cart</button>
+          <button className="btn btn-primary" onClick={(e) => handleAddToCart(e, product)}>Add to Cart</button>
         </div>
       </div>
     </div>
