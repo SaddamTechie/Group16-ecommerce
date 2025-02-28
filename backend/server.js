@@ -19,10 +19,10 @@ app.use(express.json()); //allows us to accept JSON data in the req.body;
 app.use("/api/products",router)
 
 if (process.env.NODE_ENV === "production") {
-   app.use(express.static(path.join(__dirname,"/frontend/dist")));
+   app.use(express.static(path.join(__dirname,"/frontend/build")));
 
    app.get("*",(req,res)=>{
-    res.sendFile(path.resolve(__dirname,"frontend","dist","index.html"));
+    res.sendFile(path.resolve(__dirname,"frontend","build","index.html"));
    })
 }
 
@@ -30,12 +30,3 @@ app.listen(PORT,()=>{
     connectDB();
     console.log(`Server Started at http://localhost:${PORT}`);
 })
-
-
-/*
-"scripts": {
-    "dev": "NODE_ENV=development nodemon backend/server.js",
-    "build":"npm install && npm install --prefix frontend && npm run build --prefix frontend",
-    "start":"NODE_ENV=production node backend/server.js"
-  },
-  */

@@ -9,7 +9,7 @@ export function ProductProvider({ children }) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch('http://localhost:8000/api/products')
+    fetch('/api/products')
       .then(response => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -27,7 +27,7 @@ export function ProductProvider({ children }) {
 
   const fetchProductById = async (id) => {
     try {
-      const response = await fetch(`http://localhost:8000/api/products/${id}`);
+      const response = await fetch(`/api/products/${id}`);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -39,7 +39,7 @@ export function ProductProvider({ children }) {
 
   const addProduct = async (productData) => {
     try {
-      const response = await fetch('http://localhost:8000/api/products', {
+      const response = await fetch('/api/products', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
