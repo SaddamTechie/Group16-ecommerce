@@ -10,7 +10,7 @@
 
 ## 🌟 Overview
 
-ShopHub transforms market with a modern, intuitive interface designed for seamless shopping.
+ShopHub transforms the market with a modern, interactive interface designed for seamless shopping.
 
 ## ✨ Features
 
